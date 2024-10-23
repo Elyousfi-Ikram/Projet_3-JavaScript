@@ -1,19 +1,26 @@
 let reponse = await fetch('http://localhost:5678/api/works');
 const works = await reponse.json();
-// console.log(works);
 
 reponse = await fetch('http://localhost:5678/api/categories');
 const categories = await reponse.json();
-// console.log(categories);
 
 const filtres = document.querySelector(".filtres");
 const boutonsFiltres = [];
 const galerie = document.querySelector(".gallery");
 
 const tous = document.createElement("button");
+
+const login = document.querySelector("#login");
+const logout = document.querySelector("#logout");
+
+const divModifier = document.querySelector("#div-modifier")
+
+const boutonModifier = document.querySelector("#bouton-modifier");
+
 tous.classList.add("bouton-filtres");
 tous.textContent = "Tous";
 filtres.appendChild(tous);
+boutonsFiltres.push(tous);
 
 categories.forEach(categorie => {
     const boutonFiltres = document.createElement("button");
@@ -45,18 +52,47 @@ function afficherOeuvres(oeuvres) {
 afficherOeuvres(works);
 
 boutonsFiltres.forEach(buttonFiltre => {
-    buttonFiltre.addEventListener("click", function (event) {
-        const boutonClique = event.target.textContent;
+    buttonFiltre.addEventListener("click", function () {
+        const boutonClique = this;
+
         let categoriesFiltrer = works;
-    
-        if (boutonClique !== "Tous") {
+
+        if (boutonClique.textContent !== "Tous") {
             // Filtrer les œuvres par la catégorie sélectionnée
-            categoriesFiltrer = works.filter(work => work.category.name === boutonClique);
+            categoriesFiltrer = works.filter(work => work.category.name === this.textContent);
         }
 
+        boutonsFiltres.forEach(btn => {
+            btn.classList.remove("activated");
+        });
+
+        // Ajouter la classe 'activated' au bouton cliqué
         boutonClique.classList.add("activated");
-    
+
         // Affiche les œuvres filtrées
         afficherOeuvres(categoriesFiltrer);
     });
 });
+
+document.querySelector("#logout").addEventListener("click", (event) => {
+    event.preventDefault();
+
+    sessionStorage.removeItem("token");
+    window.location.href = "index.html";
+});
+
+
+if (sessionStorage.getItem("token")) {  // l'utilisateur est connecté
+    // console.log("token", sessionStorage.getItem("token"));
+    login.classList.add("display-none");
+    logout.classList.remove("display-none");
+    boutonModifier.classList.remove("display-none");
+    filtres.classList.add("display-none");
+    divModifier.classList.add("margin-bottom-div-modifier");
+    
+} else {                                // l'utilisateur n'est pas connecté
+    logout.classList.add("display-none");
+    boutonModifier.classList.add("display-none");
+    filtres.classList.remove("display-none");
+    divModifier.classList.remove("margin-bottom-div-modifier");
+}
