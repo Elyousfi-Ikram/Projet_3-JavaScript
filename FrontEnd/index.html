@@ -8,16 +8,21 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
-		  rel="stylesheet">
+		rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-		  integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-		  crossorigin="anonymous" referrerpolicy="no-referrer" />
+		integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="index.js" type="module" defer></script>
 </head>
 
 <body>
+	<div class="mode-edition">
+		<i class="fa-solid fa-pen-to-square fa-2xs" style="color: #fff;"></i>
+		<span>Mode édition</span>
+	</div>
+
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
@@ -47,17 +52,15 @@
 			</article>
 		</section>
 		<section id="portfolio">
-			<div id="div-modifier">
+			<div id="gallerie-titre">
 				<h2>Mes Projets</h2>
-				<button type="button" id="bouton-modifier">
+				<a href="#modal1" class="modal-modifier">
 					<i class="fa-solid fa-pen-to-square fa-2xs" style="color: #000000;"></i>
 					<span>modifier</span>
-				</button>
+				</a>
 			</div>
-			<div class="filtres">
-			</div>
-			<div class="gallery">
-			</div>
+			<div class="filtres"></div>
+			<div class="gallery"></div>
 		</section>
 		<section id="contact">
 			<h2>Contact</h2>
@@ -81,6 +84,52 @@
 			</ul>
 		</nav>
 	</footer>
+
+	<!-- Modale pour la modification des galeries -->
+	<aside id="modal1" class="modal display-none" aria-hidden="true" role="dialog" aria-labelledby="title-modal">
+		<div class="modal-wapper modal-modifier-stop">
+			<button class="modal-close">
+				<i class="fa-solid fa-xmark"></i>
+			</button>
+			<h3>Galerie photo</h3>
+			<!-- Conteneur pour la galerie de la modale -->
+			<div class="galerie-content">
+				<div class="modal-gallery"></div>
+			</div>
+			<hr>
+			<a href="#modal2" class="ajout-photo">Ajouter une photo</a>
+		</div>
+	</aside>
+
+	<aside id="modal2" class="modal display-none" aria-hidden="true" role="dialog" aria-labelledby="title-modal">
+		<div class="modal-wapper modal-modifier-stop">
+			<button class="modal-back">
+				<i class="fa-solid fa-arrow-left"></i>
+			</button>
+			<button class="modal-close">
+				<i class="fa-solid fa-xmark"></i>
+			</button>
+			<h3>Ajout photo</h3>
+			<!-- Conteneur pour la galerie de la modale -->
+			<form class="form-ajouter-photo">
+				<div class="form-ajout-photo">
+					<i class="fa-regular fa-image"></i>
+					<input type="file" name="file" id="input-file" accept="image/*" required>
+					<button class="btn-ajouter-photo"> + Ajouter photo</button>
+					<img id="imagePreview" src="" alt="Aperçu de l'image" style="display: none ">
+					<p>jpg. png : 4mo max</p>
+				</div>
+
+				<label for="titre-work-ajoute">Titre</label>
+				<input type="text" id="titre-work-ajoute" name="titre" required>
+
+				<label for="categorie-ajout">Catégorie</label>
+				<select id="categorie-ajout" class="select" name="categorie" required></select>
+				<hr>
+				<button type="submit" class="btn-form-valider btn-grey" disabled>Valider</button>
+			</form>
+		</div>
+	</aside>
 </body>
 
 </html>
