@@ -48,18 +48,18 @@
 					couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du
 					chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
 				<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG,
-					décorateur(trice)</p>
+					décorateur(trice).</p>
 			</article>
 		</section>
 		<section id="portfolio">
-			<div id="gallerie-titre">
+			<div id="gallery-title">
 				<h2>Mes Projets</h2>
-				<a href="#modal1" class="modal-modifier">
+				<a href="#modal1" class="link-modal">
 					<i class="fa-solid fa-pen-to-square fa-2xs" style="color: #000000;"></i>
 					<span>modifier</span>
 				</a>
 			</div>
-			<div class="filtres"></div>
+			<div class="filters"></div>
 			<div class="gallery"></div>
 		</section>
 		<section id="contact">
@@ -85,49 +85,50 @@
 		</nav>
 	</footer>
 
-	<!-- Modale pour la modification des galeries -->
-	<aside id="modal1" class="modal display-none" aria-hidden="true" role="dialog" aria-labelledby="title-modal">
-		<div class="modal-wapper modal-modifier-stop">
+	<!-- .modal-gallery => #modal .gallery -->
+
+	<aside id="modal-work-delete" class="modal display-none" aria-hidden="true" role="dialog" aria-labelledby="title-modal">
+		<div class="modal-work-delete">
 			<button class="modal-close">
 				<i class="fa-solid fa-xmark"></i>
 			</button>
 			<h3>Galerie photo</h3>
-			<!-- Conteneur pour la galerie de la modale -->
-			<div class="galerie-content">
-				<div class="modal-gallery"></div>
+			<div class="gallery">
+				<div class="gallery-content"></div>
 			</div>
 			<hr>
-			<a href="#modal2" class="ajout-photo">Ajouter une photo</a>
+			<button class="btn-modal-add">Ajouter une photo</button>
 		</div>
 	</aside>
 
-	<aside id="modal2" class="modal display-none" aria-hidden="true" role="dialog" aria-labelledby="title-modal">
-		<div class="modal-wapper modal-modifier-stop">
+	<aside id="modal-work-add" class="modal display-none" aria-hidden="true" role="dialog" aria-labelledby="title-modal">
+		<div class="modal-work-add">
 			<button class="modal-back">
 				<i class="fa-solid fa-arrow-left"></i>
 			</button>
 			<button class="modal-close">
 				<i class="fa-solid fa-xmark"></i>
 			</button>
+
 			<h3>Ajout photo</h3>
-			<!-- Conteneur pour la galerie de la modale -->
-			<form class="form-ajouter-photo">
-				<div class="form-ajout-photo">
+
+			<form class="form-add">
+				<div class="form-work-add">
 					<i class="fa-regular fa-image"></i>
 					<input type="file" name="file" id="input-file" accept="image/*" required>
-					<button class="btn-ajouter-photo"> + Ajouter photo</button>
-					<img id="imagePreview" src="" alt="Aperçu de l'image" style="display: none ">
+					<button class="btn-work-add"> + Ajouter photo</button>
+					<img id="imagePreview" src="" alt="Aperçu de l'image" class="display-none">
 					<p>jpg. png : 4mo max</p>
 				</div>
 
-				<label for="titre-work-ajoute">Titre</label>
-				<input type="text" id="titre-work-ajoute" name="titre" required>
+				<label for="title-work-add">Titre</label>
+				<input type="text" id="title-work-add" name="title" required>
 
-				<label for="categorie-ajout">Catégorie</label>
-				<select id="categorie-ajout" class="select" name="categorie" required></select>
-				<hr>
-				<button type="submit" class="btn-form-valider btn-grey" disabled>Valider</button>
+				<label for="category-add">Catégorie</label>
+				<select id="category-add" class="select-category" name="category" required></select>
 			</form>
+			<hr>
+			<button type="submit" class="btn-form-validated btn-grey" disabled>Valider</button>
 		</div>
 	</aside>
 </body>

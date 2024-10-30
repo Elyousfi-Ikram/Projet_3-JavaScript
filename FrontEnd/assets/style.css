@@ -148,6 +148,10 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
+	padding: 35px 0 50px 0;
+}
+
+.padding-header-mode-edition{
 	padding: 80px 0 50px 0;
 }
 
@@ -296,7 +300,7 @@ footer nav ul {
 	margin-bottom: 0;
 }
 
-.filtres {
+.filters {
 	margin: 50px 0;
 	display: flex;
 	justify-content: center;
@@ -312,7 +316,7 @@ button {
 	color: #1D6154;
 }
 
-.filtres .activated {
+.filters .activated {
 	background-color: #1D6154;
 	color: white;
 }
@@ -320,6 +324,29 @@ button {
 a {
 	text-decoration: none;
 	color: black;
+}
+
+.work-item {
+	padding: 11px 0;
+}
+
+.work-item p {
+	padding-top: 7px;
+}
+
+#gallery-title {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.margin-bottom-gallery-title {
+	margin-bottom: 90px;
+}
+
+.display-none {
+	display: none !important;
 }
 
 /* ---------------------------------------------------------------------------- PAGE LOGIN --------------------------------------------------------------------------- */
@@ -389,35 +416,12 @@ footer {
 	width: 100%;
 }
 
-.work-item {
-	padding: 11px 0;
-}
-
-.work-item p {
-	padding-top: 7px;
-}
-
-.display-none {
-	display: none !important;
-}
-
-#gallerie-titre {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-}
-
-.margin-bottom-gallerie-titre {
-	margin-bottom: 90px;
-}
-
 .fa-pen-to-square {
 	font-size: 12px;
 	padding-right: 5px;
 }
 
-.modal-modifier {
+.link-modal {
 	display: flex;
 	align-items: center;
 	border: none;
@@ -427,7 +431,7 @@ footer {
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-/* ---------------------------------------------------------------------------- INTERIEUR MODAL 1 -------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------------- AFFICHAGE INTERIEUR MODAL GENERAL -------------------------6-------------------------- */
 
 .modal {
 	position: fixed;
@@ -442,7 +446,7 @@ footer {
 	background: rgba(0, 0, 0, 0.3);
 }
 
-.modal-wapper {
+.modal-work-delete, .modal-work-add {
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -456,32 +460,88 @@ footer {
 }
 
 .modal-close {
-	border: none;
-	color: black;
-	width: min-content;
 	position: absolute;
-	right: 15px;
-	top: 10px;
-	font-size: 20px;
+    right: 10px;
+    top: 10px;
+	z-index: 1;
+    width: min-content;
+	border: none;
+    color: black;
+    font-size: 20px;
 }
 
-.galerie-content {
+.modal-back {
+	position: absolute;
+    left: 10px;
+    top: 10px;
+	z-index: 1;
+    width: min-content;
+	border: none;
+    color: black;
+    font-size: 20px;
+}
+
+.modal-work-delete>h3, .modal-work-add>h3 {
+	display: flex;
+    justify-content: center;
+    padding: 50px 0 20px 0;
+    font-size: 20px;
+}
+
+hr {
+    position: absolute;
+    bottom: 90px;
+    left: 0;
+    right: 0;
+    width: 420px;
+}
+
+.btn-modal-add, .btn-form-validated {
+	position: absolute;
+	bottom: 33px;
+	border: 2px solid #1D6154;
+	width: 250px;
+	background-color: #1D6154;
+	color: white;
+	border-radius: 60px;
+}
+
+.btn-grey {
+	color: white;
+	border: 2px solid #A7A7A7;
+	background-color: #A7A7A7;
+}
+
+.btn-green {
+	color: white;
+	border: 2px solid #1D6154;
+	background-color: #1D6154;
+}
+
+.hidden {
+    display: none;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------------------- INTERIEUR MODAL 1 -------------------------------------------------------------------- */
+
+.modal-work-delete .gallery {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	margin: 0 80px;
 	min-width: fit-content;
 }
 
-.modal-gallery {
+.gallery-content {
 	display: grid;
 	grid-template-areas: "a a a a a";
 	grid-gap: 20px 10px;
 	width: 420px;
 }
 
-.modal-gallery .work-item {
+.gallery-content .work-item {
 	padding: 0;
 	height: 105px;
 }
@@ -507,23 +567,13 @@ footer {
 
 /* ---------------------------------------------------------------------------- INTERIEUR MODAL 2 -------------------------------------------------------------------- */
 
-.modal-back {
-	border: none;
-	color: black;
-	width: min-content;
-	position: absolute;
-	left: 15px;
-	top: 10px;
-	font-size: 20px;
-}
-
-.form-ajouter-photo {
+.form-add {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
 }
 
-.form-ajout-photo {
+.form-work-add {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -536,24 +586,24 @@ footer {
 	background-color: #E8F1F6;
 }
 
-.form-ajout-photo input {
+.form-work-add input {
 	height: 21px !important;
 	width: 115px;
 	box-shadow: none !important;
 	position: absolute;
-	top: 192px;
-	left: 285px;
+	top: 199px;
+	left: 268px;
 	opacity: 0;
 }
 
-.btn-ajouter-photo {
+.form-work-add .btn-work-add {
 	background-color: #B9C5CC;
 	color: #306685;
 	border: none;
 	width: 150px;
 }
 
-.form-ajout-photo p {
+.form-work-add p {
 	font-size: 10px;
 }
 
@@ -566,15 +616,14 @@ footer {
 	width: 22%;
 	height: 170px;
 	position: absolute;
-	top: 93px;
+	top: 100px;
 }
 
-
-.form-ajouter-photo label {
+.form-add label {
 	padding: 20px 0 15px 0;
 }
 
-.form-ajouter-photo input {
+.form-add input {
 	height: 45px;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
@@ -582,7 +631,7 @@ footer {
 	font-family: "work sans";
 }
 
-.select {
+.select-category {
 	border: transparent;
 	outline: none;
 	background-color: transparent;
@@ -595,66 +644,4 @@ footer {
 	font-family: "work sans";
 }
 
-.btn-form-valider {
-	position: absolute;
-	right: 0;
-    left: 0;
-    margin: auto;
-	bottom: 40px;
-	width: 250px;
-	height: 30px;
-	color: white;
-}
-
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-/* ---------------------------------------------------------------------------- AFFICHAGE INTERIEUR MODAL GENERAL -------------------------6-------------------------- */
-
-.modal-wapper>h3 {
-	display: flex;
-	justify-content: center;
-	padding: 30px 0;
-	font-size: 23px;
-}
-
-hr {
-	position: absolute;
-	bottom: 95px;
-	left: 0;
-	right: 0;
-	width: 420px;
-	display: flex;
-	align-items: center;
-}
-
-.modal-wapper a {
-	position: absolute;
-	bottom: 40px;
-	border: 2px solid #1D6154;
-	width: 250px;
-	height: 30px;
-	line-height: 30px;
-	text-align: center;
-	background-color: #1D6154;
-	color: white;
-	border-radius: 60px;
-}
-
-.btn-grey {
-	color: white;
-	border: 2px solid #A7A7A7;
-	background-color: #A7A7A7;
-}
-
-.btn-green {
-	color: white;
-	border: 2px solid #1D6154;
-	background-color: #1D6154;
-}
-
-.hidden {
-    display: none;
-}
-
-/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-

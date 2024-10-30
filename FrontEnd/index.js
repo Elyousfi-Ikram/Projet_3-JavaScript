@@ -6,48 +6,52 @@ const categories = await response.json();
 
 const body = document.querySelector("body")
 
-const filtres = document.querySelector(".filtres");
-const boutonsFiltres = [];
-const galerie = document.querySelector(".gallery");
+const filters = document.querySelector(".filters");
+const buttonsFilters  = [];
+const gallery = document.querySelector(".gallery");
 
 const tous = document.createElement("button");
 
 const login = document.querySelector("#login");
 const logout = document.querySelector("#logout");
 
-const modeEdition = document.querySelector(".mode-edition")
+const modeEdition = document.querySelector(".mode-edition");
+const header = document.querySelector("header");
 
-const gallerieTtitre = document.querySelector("#gallerie-titre")
-const modalModifier = document.querySelector(".modal-modifier");
-const modal1 = document.querySelector("#modal1");
-const btnAjoutPhoto = document.querySelector(".ajout-photo");
-const modal2 = document.querySelector("#modal2");
+const galleryTitle = document.querySelector("#gallery-title");
+const linkModal = document.querySelector(".link-modal");
+const modalWorkDelete = document.querySelector("#modal-work-delete");
+const btnAjoutPhoto = document.querySelector(".btn-modal-add");
+const modalWorkAdd = document.querySelector("#modal-work-add");
 
 const fileInput = document.getElementById('input-file');
 const imagePreview = document.getElementById('imagePreview');
 
-const categoriesSelect = document.querySelector("select#categorie-ajout");
+const categoriesSelect = document.querySelector("select#category-add");
 
-tous.classList.add("bouton-filtres");
+tous.classList.add("galleryTitles");
 tous.textContent = "Tous";
-filtres.appendChild(tous);
-boutonsFiltres.push(tous);
+filters.appendChild(tous);
+buttonsFilters .push(tous);
+
+const formWorkAdd = modalWorkAdd.querySelector(".form-add");
+
 
 // ----------------------------------------------------------- CATEGORIE ET BOUTONS FILTRES DANS PAGE HTML ----------------------------------------------------------- //
 
 categories.forEach(categorie => {
-    const boutonFiltres = document.createElement("button");
-    boutonFiltres.classList.add("bouton-filtres");
-    boutonFiltres.textContent = categorie.name;
-    filtres.appendChild(boutonFiltres);
+    const buttonFilters  = document.createElement("button");
+    buttonFilters .classList.add("galleryTitles");
+    buttonFilters .textContent = categorie.name;
+    filters.appendChild(buttonFilters );
 
-    boutonsFiltres.push(boutonFiltres);
+    buttonsFilters .push(buttonFilters );
 });
 
 // Fonction pour afficher les œuvres dans la galerie
-function afficherOeuvres(oeuvres) {
+function displayWorks(oeuvres) {
     // On vide d'abord la galerie
-    galerie.innerHTML = "";
+    gallery.innerHTML = "";
 
     // Ajout de chaque œuvre dans la galerie
     oeuvres.forEach(work => {
@@ -57,33 +61,33 @@ function afficherOeuvres(oeuvres) {
             <img src="${work.imageUrl}" alt="${work.title}">
             <p>${work.title}</p>
         `;
-        galerie.appendChild(workElement);
+        gallery.appendChild(workElement);
     });
 }
 
 // Affiche toutes les œuvres au début
-afficherOeuvres(works);
+displayWorks(works);
 
-boutonsFiltres.forEach(buttonFiltre => {
+buttonsFilters .forEach(buttonFiltre => {
     buttonFiltre.addEventListener("click", function () {
-        const boutonClique = this;
+        const buttonClick = this;
 
-        let categoriesFiltrer = works;
+        let categoriesFilter = works;
 
-        if (boutonClique.textContent !== "Tous") {
+        if (buttonClick.textContent !== "Tous") {
             // Filtrer les œuvres par la catégorie sélectionnée
-            categoriesFiltrer = works.filter(work => work.category.name === this.textContent);
+            categoriesFilter = works.filter(work => work.category.name === this.textContent);
         }
 
-        boutonsFiltres.forEach(btn => {
+        buttonsFilters .forEach(btn => {
             btn.classList.remove("activated");
         });
 
         // Ajouter la classe 'activated' au bouton cliqué
-        boutonClique.classList.add("activated");
+        buttonClick.classList.add("activated");
 
         // Affiche les œuvres filtrées
-        afficherOeuvres(categoriesFiltrer);
+        displayWorks(categoriesFilter);
     });
 });
 
@@ -103,16 +107,18 @@ if (sessionStorage.getItem("token")) {  // l'utilisateur est connecté
 
     login.classList.add("display-none");
     logout.classList.remove("display-none");
-    filtres.classList.add("display-none");
-    // modalModifier.classList.remove("display-none");
-    gallerieTtitre.classList.add("margin-bottom-gallerie-titre");
+    filters.classList.add("display-none");
+    galleryTitle.classList.add("margin-bottom-gallery-title");
+    header.classList.add("padding-header-mode-edition");
 
 } else {                                // l'utilisateur n'est pas connecté
     logout.classList.add("display-none");
     modeEdition.classList.add("display-none")
-    filtres.classList.remove("display-none");
-    modalModifier.classList.add("display-none");
-    gallerieTtitre.classList.remove("margin-bottom-gallerie-titre");
+    filters.classList.remove("display-none");
+    linkModal.classList.add("display-none");
+    galleryTitle.classList.remove("margin-bottom-gallery-title");
+    header.classList.remove("padding-header-mode-edition");
+
 }
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------//
@@ -122,18 +128,20 @@ if (sessionStorage.getItem("token")) {  // l'utilisateur est connecté
 
 // ---------------------------------------------------------------------- OURVIR / FERMER MODALE --------------------------------------------------------------------- //
 
-let openModal = function (modal) {
+const openModal = function (modal) {
     modal.classList.remove("display-none");
     modal.removeAttribute("aria-hidden");
     modal.setAttribute("aria-modal", "true");
     modal.addEventListener("click", () => closeModal(modal));
-    modal.querySelector(".modal-modifier-stop").addEventListener("click", stopPropagation);
+    modal.querySelector("div[class^=modal-work").addEventListener("click", stopPropagation);
+
     if (modal.querySelector(".modal-back") !== null) {
         modal.querySelector(".modal-back").addEventListener("click", () => closeModal(modal));
     }
 
     // Charger les œuvres dans la galerie de la modale quand elle s'ouvre
-    afficherOeuvresDansModal(works);
+    displayWorksInModal(works);
+    
 };
 
 const closeModal = function (modal) {
@@ -141,7 +149,8 @@ const closeModal = function (modal) {
     modal.setAttribute("aria-hidden", "true");
     modal.removeAttribute("aria-modal");
     modal.removeEventListener("click", closeModal);
-    modal.querySelector(".modal-modifier-stop").removeEventListener("click", stopPropagation);
+    modal.querySelector("div[class^=modal-work").removeEventListener("click", stopPropagation);
+
     if (modal.querySelector(".modal-back") !== null) {
         modal.querySelector(".modal-back").removeEventListener("click", closeModal);
     }
@@ -151,24 +160,31 @@ const stopPropagation = function (e) {
     e.stopPropagation()
 };
 
-document.querySelectorAll("a[href*=modal]").forEach((a) => {
-    a.addEventListener("click", (event) => {
-        event.preventDefault(); // Empêche le comportement par défaut du lien
+const closeAllVisibleModals = () => {
+    const allVisibleModals = document.querySelectorAll("aside[aria-modal]");
 
-        let modal = document.querySelector(a.getAttribute("href"));
-        openModal(modal); // Appelle openModal avec le bon contexte
+    allVisibleModals.forEach(modal => {
+        closeModal(modal);
     });
+};
+
+const resetFormWorkAdd = () => {
+    formWorkAdd.reset();
+    imagePreview.src = "";
+    imagePreview.classList.add("display-none"); // Cache l'image
+};
+
+document.querySelector(".link-modal").addEventListener("click", (event) => {
+    openModal(modalWorkDelete);
 });
 
-
+btnAjoutPhoto.addEventListener("click", () => {
+    openModal(modalWorkAdd);
+});
 
 document.querySelectorAll("button[class~=modal-close]").forEach(btn => {
     btn.addEventListener("click", () => {
-        const allVisibleModals = document.querySelectorAll("aside[aria-modal]");
-
-        allVisibleModals.forEach(modal => {
-            closeModal(modal);
-        })
+        closeAllVisibleModals();
     });
 });
 
@@ -177,8 +193,8 @@ document.querySelectorAll("button[class~=modal-close]").forEach(btn => {
 // ----------------------------------------------------------- SUPPRIMER OEUVRES DANS MODAL 1 -------------------------------------------------------------------------//
 
 // Fonction pour afficher les œuvres dans la galerie de la modale avec bouton de suppression
-function afficherOeuvresDansModal(oeuvres) {
-    const modalGallery = document.querySelector(".modal-gallery");
+function displayWorksInModal(oeuvres) {
+    const modalGallery = document.querySelector(".gallery-content");
     modalGallery.innerHTML = "";
 
     oeuvres.forEach(work => {
@@ -194,14 +210,13 @@ function afficherOeuvresDansModal(oeuvres) {
     // Ajouter l'écouteur pour les boutons de suppression
     document.querySelectorAll(".delete-work").forEach(button => {
         button.addEventListener("click", async function () {
-            console.log("button", button)
             const workId = button.getAttribute("data-id");
-            console.log("work id", workId);
+
             await supprimerOeuvre(workId);
             // Filtre la liste des œuvres pour retirer l'élément supprimé
-            const nouvelleListe = await (await fetch('http://localhost:5678/api/works')).json();
-            afficherOeuvresDansModal(nouvelleListe);
-            afficherOeuvres(nouvelleListe);
+            works = await (await fetch('http://localhost:5678/api/works')).json();
+            displayWorksInModal(works);
+            displayWorks(works);
         });
     });
 };
@@ -232,20 +247,26 @@ async function supprimerOeuvre(workId) {
 // -------------------------------------------------------------------- AJOUTER PHOTO DANS MODAL 2 ------------------------------------------------------------------- //
 
 fileInput.addEventListener('change', function (event) {
-    const file = event.target.files[0]; // Récupère le premier fichier sélectionné
+    const file = event.target.files[0]; // Récupère le premier fichier sélectionné^
 
     if (file) {
         const reader = new FileReader(); // Crée un nouvel objet FileReader
 
         // Définit la fonction à appeler une fois le fichier chargé
-        reader.onload = function (e) {
-            imagePreview.src = e.target.result; // Définit la source de l'image
-            imagePreview.style.display = 'block'; // Affiche l'image
+        reader.onload = function (event) {
+            imagePreview.src = event.target.result; // Définit la source de l'image
+            imagePreview.classList.remove("display-none"); // Affiche l'image
         };
 
         reader.readAsDataURL(file); // Lit le fichier en tant qu'URL de données
     }
 });
+
+const defaultOption = document.createElement("option");
+defaultOption.setAttribute("disabled", "disabled"); // Empêche la sélection après choix
+defaultOption.setAttribute("selected", "selected"); // Affiche cette option par défaut
+
+categoriesSelect.appendChild(defaultOption);
 
 categories.forEach(categorie => {
     // Crée un nouvel élément <option> pour chaque catégorie
@@ -255,25 +276,18 @@ categories.forEach(categorie => {
     categoriesSelect.appendChild(optionCategorie);
 });
 
-const defaultOption = document.createElement("option");
-defaultOption.value = "";  // Valeur vide
-defaultOption.disabled = true; // Empêche la sélection après choix
-defaultOption.selected = true; // Affiche cette option par défaut
-
-categoriesSelect.add(defaultOption, 0);
-
-const addWorkForm = document.querySelector(".form-ajouter-photo");
-const btnValidateForm = document.querySelector(".btn-form-valider");
+const addWorkForm = document.querySelector(".form-add");
+const btnValidateForm = document.querySelector(".btn-form-validated");
 let img = null;
 let title = null;
-let categorie = null;
+let categorieName = null;
 
 addWorkForm.addEventListener("change", () => {
-    img = addWorkForm.querySelector("img").src;
+    img = addWorkForm.querySelector("input[type=file]").files[0];
     title = addWorkForm.querySelector("input[type=text]").value;
-    categorie = addWorkForm.querySelector("select.select").value;
+    categorieName = addWorkForm.querySelector("select.select-category").value;
 
-    if (img !== null && title !== '' && categorie !== '') {
+    if (img !== '' && title !== '' && categorieName !== '') {
         btnValidateForm.removeAttribute("disabled");
         btnValidateForm.classList.remove("btn-grey");
         btnValidateForm.classList.add("btn-green");
@@ -286,29 +300,32 @@ addWorkForm.addEventListener("change", () => {
 
 btnValidateForm.addEventListener("click", async (event) => {
     event.preventDefault();
+    const categorieId = categories.filter(categorie => categorie.name === categorieName)[0].id;
 
-    console.log("condition", img !== null && title !== '' && categorie !== '');
+    const body = new FormData();
+    body.append("image", img);       // Assurez-vous que `img` est un fichier ou un Blob.
+    body.append("title", title);
+    body.append("category", categorieId);
 
-    response = fetch("http://localhost:5678/api/works", {
+    response = await fetch("http://localhost:5678/api/works", {
         method: "POST",
         headers: {
             "accept": "application/json",
-            "Content-Type": "multipart/form-data"
+            // "Content-Type": "multipart/form-data",
+            "Authorization": "Bearer " + sessionStorage.getItem('token')
         },
-        body: {
-            image: img,
-            title: title,
-            category: categorie,
-        }
-    })
+        body: body
+    });
 
-    console.log("response", response)
-
-    if (response.ok) {
+    if (response.status === 201) {
         response = await fetch('http://localhost:5678/api/works');
-        works = response.json();
-        afficherOeuvres(works);
+        works = await response.json();
+        displayWorks(works);
+
+        closeAllVisibleModals();
+        resetFormWorkAdd();
     }
 });
 
 // ---------------------------------------------------------------------------------------------------------------------------------//
+
