@@ -110,13 +110,13 @@ if (sessionStorage.getItem("token")) {  // l'utilisateur est connecté
     header.classList.add("padding-header-mode-edition");
 
 } else {                                // l'utilisateur n'est pas connecté
+    
     logout.classList.add("display-none");
     modeEdition.classList.add("display-none")
     filters.classList.remove("display-none");
     linkModal.classList.add("display-none");
     galleryTitle.classList.remove("margin-bottom-gallery-title");
     header.classList.remove("padding-header-mode-edition");
-
 }
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------//

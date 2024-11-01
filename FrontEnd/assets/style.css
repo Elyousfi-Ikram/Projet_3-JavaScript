@@ -135,8 +135,10 @@ table {
 }
 
 /** end reset css**/
-/* ---------------------------------------------------------------------------- INDEX.HTML CONNECTE ------------------------------------------------------------------ */
 
+
+
+/* ---------------------------------------------------------------------------- INDEX.HTML CONNECTE ------------------------------------------------------------------ */
 
 body {
 	padding: 0 165px;
@@ -151,7 +153,7 @@ header {
 	padding: 35px 0 50px 0;
 }
 
-.padding-header-mode-edition{
+.padding-header-mode-edition {
 	padding: 80px 0 50px 0;
 }
 
@@ -194,8 +196,10 @@ nav li {
 	font-size: 19.2px;
 }
 
-li:hover {
+li:hover,
+a:hover {
 	color: #B1663C;
+	font-weight: bold;
 }
 
 #introduction {
@@ -349,6 +353,18 @@ a {
 	display: none !important;
 }
 
+footer {
+	position: absolute;
+	left: 0;
+	display: flex;
+	flex-direction: row-reverse;
+	width: 1468px;
+	height: 60px;
+	line-height: 0px;
+	background-color: white;
+	color: black;
+}
+
 /* ---------------------------------------------------------------------------- PAGE LOGIN --------------------------------------------------------------------------- */
 
 #section-login {
@@ -370,7 +386,7 @@ a {
 	margin-top: 30px;
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 115px;
+	padding-bottom: 90px;
 }
 
 #section-login input {
@@ -398,13 +414,20 @@ a {
 	text-align: center;
 }
 
-footer {
-	background-color: white;
-	height: 60px;
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	right: 0;
 	display: flex;
 	flex-direction: row-reverse;
-	align-items: center;
+	width: 100%;
+	height: 60px;
+	line-height: 0px;
+	background-color: white;
+	color: black;
 }
+
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 /* ---------------------------------------------------------------------------- INDEX.HTML UNE FOIS CONNECTE --------------------------------------------------------- */
@@ -432,6 +455,10 @@ footer {
 	border: none;
 	position: absolute;
 	margin-left: 300px;
+
+	& :hover {
+		color: black;
+	}
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -451,7 +478,8 @@ footer {
 	background: rgba(0, 0, 0, 0.3);
 }
 
-.modal-work-delete, .modal-work-add {
+.modal-work-delete,
+.modal-work-add {
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -466,42 +494,44 @@ footer {
 
 .modal-close {
 	position: absolute;
-    right: 10px;
-    top: 10px;
+	right: 10px;
+	top: 10px;
 	z-index: 1;
-    width: min-content;
+	width: min-content;
 	border: none;
-    color: black;
-    font-size: 20px;
+	color: black;
+	font-size: 20px;
 }
 
 .modal-back {
 	position: absolute;
-    left: 10px;
-    top: 10px;
+	left: 10px;
+	top: 10px;
 	z-index: 1;
-    width: min-content;
+	width: min-content;
 	border: none;
-    color: black;
-    font-size: 20px;
+	color: black;
+	font-size: 20px;
 }
 
-.modal-work-delete>h3, .modal-work-add>h3 {
+.modal-work-delete>h3,
+.modal-work-add>h3 {
 	display: flex;
-    justify-content: center;
-    padding: 50px 0 20px 0;
-    font-size: 20px;
+	justify-content: center;
+	padding: 50px 0 20px 0;
+	font-size: 20px;
 }
 
 hr {
-    position: absolute;
-    bottom: 90px;
-    left: 0;
-    right: 0;
-    width: 420px;
+	position: absolute;
+	bottom: 90px;
+	left: 0;
+	right: 0;
+	width: 420px;
 }
 
-.btn-modal-add, .btn-form-validated {
+.btn-modal-add,
+.btn-form-validated {
 	position: absolute;
 	bottom: 33px;
 	border: 2px solid #1D6154;
@@ -524,7 +554,7 @@ hr {
 }
 
 .hidden {
-    display: none;
+	display: none;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------- */

@@ -9,7 +9,6 @@ document.querySelector('#form-login').addEventListener('submit', async (event) =
     };
 
     const erreurMessage = document.querySelector(".error-message");
-    const btnSubmitConnexion = document.querySelector("#submit-connexion");
 
     try {
         const response = await fetch("http://localhost:5678/api/users/login", {
@@ -25,8 +24,10 @@ document.querySelector('#form-login').addEventListener('submit', async (event) =
         if (response.ok) {  
             sessionStorage.setItem("token", data.token);
             window.location.href = "index.html";
+
         } else {
             erreurMessage.classList.remove("display-none");
+
         }
         
     } catch (error) {
