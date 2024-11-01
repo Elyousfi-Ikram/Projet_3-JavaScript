@@ -4,8 +4,6 @@ let works = await response.json();
 response = await fetch('http://localhost:5678/api/categories');
 const categories = await response.json();
 
-const body = document.querySelector("body")
-
 const filters = document.querySelector(".filters");
 const buttonsFilters  = [];
 const gallery = document.querySelector(".gallery");
@@ -174,7 +172,7 @@ const resetFormWorkAdd = () => {
     imagePreview.classList.add("display-none"); // Cache l'image
 };
 
-document.querySelector(".link-modal").addEventListener("click", (event) => {
+document.querySelector(".link-modal").addEventListener("click", () => {
     openModal(modalWorkDelete);
 });
 
