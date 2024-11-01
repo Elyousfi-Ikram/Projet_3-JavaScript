@@ -30,7 +30,7 @@ const categoriesSelect = document.querySelector("select#category-add");
 tous.classList.add("galleryTitles");
 tous.textContent = "Tous";
 filters.appendChild(tous);
-buttonsFilters .push(tous);
+buttonsFilters.push(tous);
 
 const formWorkAdd = modalWorkAdd.querySelector(".form-add");
 
@@ -39,11 +39,11 @@ const formWorkAdd = modalWorkAdd.querySelector(".form-add");
 
 categories.forEach(categorie => {
     const buttonFilters  = document.createElement("button");
-    buttonFilters .classList.add("galleryTitles");
-    buttonFilters .textContent = categorie.name;
+    buttonFilters.classList.add("galleryTitles");
+    buttonFilters.textContent = categorie.name;
     filters.appendChild(buttonFilters );
 
-    buttonsFilters .push(buttonFilters );
+    buttonsFilters.push(buttonFilters );
 });
 
 // Fonction pour afficher les œuvres dans la galerie
@@ -66,7 +66,7 @@ function displayWorks(oeuvres) {
 // Affiche toutes les œuvres au début
 displayWorks(works);
 
-buttonsFilters .forEach(buttonFiltre => {
+buttonsFilters.forEach(buttonFiltre => {
     buttonFiltre.addEventListener("click", function () {
         const buttonClick = this;
 
@@ -77,7 +77,7 @@ buttonsFilters .forEach(buttonFiltre => {
             categoriesFilter = works.filter(work => work.category.name === this.textContent);
         }
 
-        buttonsFilters .forEach(btn => {
+        buttonsFilters.forEach(btn => {
             btn.classList.remove("activated");
         });
 
@@ -102,9 +102,9 @@ document.querySelector("#logout").addEventListener("click", (event) => {
 });
 
 if (sessionStorage.getItem("token")) {  // l'utilisateur est connecté
-
     login.classList.add("display-none");
     logout.classList.remove("display-none");
+    modeEdition.classList.remove("display-none")
     filters.classList.add("display-none");
     galleryTitle.classList.add("margin-bottom-gallery-title");
     header.classList.add("padding-header-mode-edition");
