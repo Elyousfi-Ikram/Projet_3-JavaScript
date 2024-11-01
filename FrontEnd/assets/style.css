@@ -392,6 +392,12 @@ a {
 	text-decoration: underline;
 }
 
+#form-login p {
+	padding: 25px 0 0 0;
+	color: #cc0000;
+	text-align: center;
+}
+
 footer {
 	background-color: white;
 	height: 60px;
@@ -399,7 +405,6 @@ footer {
 	flex-direction: row-reverse;
 	align-items: center;
 }
-
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 /* ---------------------------------------------------------------------------- INDEX.HTML UNE FOIS CONNECTE --------------------------------------------------------- */

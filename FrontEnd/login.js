@@ -8,7 +8,8 @@ document.querySelector('#form-login').addEventListener('submit', async (event) =
         password: password,
     };
 
-    console.log("credentials", credentials);
+    const erreurMessage = document.querySelector(".error-message");
+    const btnSubmitConnexion = document.querySelector("#submit-connexion");
 
     try {
         const response = await fetch("http://localhost:5678/api/users/login", {
@@ -16,21 +17,16 @@ document.querySelector('#form-login').addEventListener('submit', async (event) =
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(credentials), // Convertit l'objet en JSON
+            body: JSON.stringify(credentials),
         });
 
-        console.log(response);
-
         const data = await response.json();
-        console.log("data", data); // Affiche la réponse dans la console
         
-        // Si la connexion est réussie, rediriger l'utilisateur vers une autre page
-        if (response.ok) {  // Supposons que le serveur renvoie un indicateur de succès
+        if (response.ok) {  
             sessionStorage.setItem("token", data.token);
-            window.location.href = "index.html"; // Remplacer par l'URL de redirection souhaitée
+            window.location.href = "index.html";
         } else {
-            // Afficher un message d'erreur à l'utilisateur si besoin
-            alert("Connexion échouée, vérifiez vos identifiants");
+            erreurMessage.classList.remove("display-none");
         }
         
     } catch (error) {

@@ -285,7 +285,7 @@ addWorkForm.addEventListener("change", () => {
     title = addWorkForm.querySelector("input[type=text]").value;
     categorieName = addWorkForm.querySelector("select.select-category").value;
 
-    if (img !== '' && title !== '' && categorieName !== '') {
+    if (img !== undefined && title !== '' && categorieName !== '') {
         btnValidateForm.removeAttribute("disabled");
         btnValidateForm.classList.remove("btn-grey");
         btnValidateForm.classList.add("btn-green");
@@ -326,4 +326,3 @@ btnValidateForm.addEventListener("click", async (event) => {
 });
 
 // ---------------------------------------------------------------------------------------------------------------------------------//
-
