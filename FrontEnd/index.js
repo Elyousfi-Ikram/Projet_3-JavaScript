@@ -5,7 +5,7 @@ response = await fetch('http://localhost:5678/api/categories');
 const categories = await response.json();
 
 const filters = document.querySelector(".filters");
-const buttonsFilters  = [];
+const buttonsFilters = [];
 const gallery = document.querySelector(".gallery");
 
 const tous = document.createElement("button");
@@ -37,15 +37,6 @@ const formWorkAdd = modalWorkAdd.querySelector(".form-add");
 
 // ----------------------------------------------------------- CATEGORIE ET BOUTONS FILTRES DANS PAGE HTML ----------------------------------------------------------- //
 
-categories.forEach(categorie => {
-    const buttonFilters  = document.createElement("button");
-    buttonFilters.classList.add("galleryTitles");
-    buttonFilters.textContent = categorie.name;
-    filters.appendChild(buttonFilters );
-
-    buttonsFilters.push(buttonFilters );
-});
-
 // Fonction pour afficher les œuvres dans la galerie
 function displayWorks(oeuvres) {
     // On vide d'abord la galerie
@@ -65,6 +56,15 @@ function displayWorks(oeuvres) {
 
 // Affiche toutes les œuvres au début
 displayWorks(works);
+
+categories.forEach(categorie => {
+    const buttonFilters = document.createElement("button");
+    buttonFilters.classList.add("galleryTitles");
+    buttonFilters.textContent = categorie.name;
+    filters.appendChild(buttonFilters);
+
+    buttonsFilters.push(buttonFilters);
+});
 
 buttonsFilters.forEach(buttonFiltre => {
     buttonFiltre.addEventListener("click", function () {
@@ -110,7 +110,7 @@ if (sessionStorage.getItem("token")) {  // l'utilisateur est connecté
     header.classList.add("padding-header-mode-edition");
 
 } else {                                // l'utilisateur n'est pas connecté
-    
+
     logout.classList.add("display-none");
     modeEdition.classList.add("display-none")
     filters.classList.remove("display-none");
@@ -139,7 +139,7 @@ const openModal = function (modal) {
 
     // Charger les œuvres dans la galerie de la modale quand elle s'ouvre
     displayWorksInModal(works);
-    
+
 };
 
 const closeModal = function (modal) {
