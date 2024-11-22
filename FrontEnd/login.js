@@ -24,7 +24,6 @@ document.querySelector('#form-login').addEventListener('submit', async (event) =
         if (response.ok) {  
             sessionStorage.setItem("token", data.token);
             window.location.href = "index.html";
-
         } else {
             erreurMessage.classList.remove("display-none");
 
